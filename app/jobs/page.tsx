@@ -1,17 +1,27 @@
+import Image from "next/image";
 import { jobs } from "@/lib/data/jobs";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Jobs – INFRA BAU GmbH",
   description:
-    "Offene Stellen bei INFRA BAU GmbH: Werde Teil unseres Tiefbau-Teams in Eugendorf, Salzburg.",
+    "Offene Stellen bei INFRA BAU GmbH in Eugendorf, Salzburg: Bauhofleiter, Techniker/Jungbauleiter, Polier. Jetzt bewerben!",
 };
 
 export default function JobsPage() {
   return (
     <>
-      <section className="pt-32 pb-16 bg-[#0D1F3C]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="relative pt-32 pb-16 bg-[#0D1F3C] overflow-hidden min-h-[40vh] flex items-end">
+        <Image
+          src="https://infrabau.at/images/infrabau-jobs24.jpg"
+          alt="INFRA BAU Jobs"
+          fill
+          priority
+          className="object-cover opacity-25"
+          unoptimized
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1F3C] to-[#0D1F3C]/60" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <span className="text-[#1D4ED8] text-xs font-semibold tracking-[0.2em] uppercase block mb-4">
             Karriere
           </span>
@@ -19,9 +29,8 @@ export default function JobsPage() {
             Jobs bei INFRA BAU
           </h1>
           <p className="text-white/60 mt-4 text-lg max-w-2xl">
-            Werde Teil eines wachsenden Unternehmens, das Infrastruktur für
-            Österreich und die DACH-Region baut. Faire Entlohnung, modernes
-            Arbeitsumfeld, echte Projekte.
+            Wir sind ein junges, dynamisches und erfolgreiches Bauunternehmen.
+            Werde Teil unseres Teams in Eugendorf bei Salzburg.
           </p>
         </div>
       </section>

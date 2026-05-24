@@ -37,9 +37,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     <div className="fixed inset-0 z-50 bg-[#0D1F3C]">
       <div className="flex flex-col h-full px-6 py-8">
         <div className="flex items-center justify-between mb-12">
-          <span className="text-white text-2xl font-bold tracking-tight">
-            INFRA BAU
-          </span>
+          <img
+            src="https://infrabau.at/images/infrabau-bauunternehmen-eugendorf-salzburg.jpg"
+            alt="INFRA BAU GmbH"
+            className="h-9 w-auto"
+          />
           <button
             onClick={onClose}
             className="text-white p-2"

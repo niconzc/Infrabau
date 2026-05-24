@@ -9,7 +9,7 @@ export const services: Service[] = [
     longDescription:
       "Wir planen und realisieren Trinkwasserversorgungs- und Abwasseranlagen für Gemeinden, Wasserverbände und Industriebetriebe. Von der Einzelleitung bis zum kompletten Ortsnetz – INFRA BAU steht für verlässliche Qualität im Leitungsbau.",
     icon: "pipe",
-    heroImage: "https://picsum.photos/seed/service-leitungsbau/1600/900",
+    heroImage: "https://infrabau.at/images/wva-radstadt/wva-radstadt3.jpg",
     scope: [
       "Trinkwasserleitungen DN32–DN500",
       "Abwasserkanäle und Druckleitungen",
@@ -27,7 +27,7 @@ export const services: Service[] = [
     longDescription:
       "Von der Stützmauer bis zur Spannbetonbrücke – INFRA BAU realisiert anspruchsvolle Betonbauwerke im Hoch- und Tiefbau. Unsere Teams beherrschen alle Schalungs- und Betonierverfahren und setzen moderne Qualitätssicherung ein.",
     icon: "concrete",
-    heroImage: "https://picsum.photos/seed/service-betonbau/1600/900",
+    heroImage: "https://infrabau.at/images/ennsbruecke/116.jpg",
     scope: [
       "Brücken und Durchlässe",
       "Stützmauern und Winkelstützmauern",
@@ -46,7 +46,7 @@ export const services: Service[] = [
     longDescription:
       "INFRA BAU ist einer der führenden Spezialisten für Mastgründungen im DACH-Raum. Wir errichten Fundamente für Hoch- und Höchstspannungsleitungen (110–380 kV) – auch im alpinen Gelände und unter widrigsten Bedingungen.",
     icon: "tower",
-    heroImage: "https://picsum.photos/seed/service-freileitungsbau/1600/900",
+    heroImage: "https://infrabau.at/images/apg-kaprun/apg-kaprun9.jpg",
     scope: [
       "Mastfundamente 110-kV- und 380-kV-Leitungen",
       "Bohrpfahlgründungen bis D=1.500 mm",
@@ -65,7 +65,7 @@ export const services: Service[] = [
     longDescription:
       "Böschungen sichern, Gelände formen, Hänge stabilisieren – INFRA BAU bietet umfassendes Know-how im Erdbau und in der geotechnischen Sicherung. Wir setzen auf bewährte Technologien wie Spritzbeton, Anker und Geotextilien.",
     icon: "mountain",
-    heroImage: "https://picsum.photos/seed/service-erdbau/1600/900",
+    heroImage: "https://infrabau.at/images/IMG_0484.jpg",
     scope: [
       "Böschungs- und Hangsicherung",
       "Felssicherung mit Systemankern",
