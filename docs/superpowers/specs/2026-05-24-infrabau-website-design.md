@@ -2,7 +2,7 @@
 **Datum:** 2026-05-24  
 **Projekt:** `~/git/infrabau`  
 **Stack:** Next.js 15 · TypeScript · TailwindCSS · Framer Motion  
-**Deployment:** Static Export (`next export`) → bestehendes Hosting
+**Deployment:** Static Export → GitHub Pages (`https://niconzc.github.io/Infrabau/`)
 
 ---
 
@@ -22,7 +22,7 @@ Komplette Neuentwicklung der Website für INFRA BAU GmbH (infrabau.at) als hochw
 |---|---|
 | Inhaltsverwaltung | Statisch / hardcoded (TypeScript Datenschicht) |
 | Sprache | Nur Deutsch |
-| Deployment | Static Export (`output: 'export'`) |
+| Deployment | GitHub Pages via GitHub Actions (`output: 'export'`) |
 | Repository | `~/git/infrabau` |
 | Hero Layout | Fullscreen Cinematic (dunkel, Text links, Bild rechts, Stats) |
 | Projekt-Sektion Homepage | Featured-Projekt groß + 3 kleinere darunter |
@@ -150,9 +150,13 @@ Alle Bilder werden als externe URLs direkt von `https://infrabau.at/images/...` 
 ```ts
 const nextConfig = {
   output: 'export',
+  basePath: '/Infrabau',
+  assetPrefix: '/Infrabau/',
   images: { unoptimized: true },
 }
 ```
+
+GitHub Actions Workflow (`.github/workflows/deploy.yml`) baut bei jedem Push auf `main` und deployed auf den `gh-pages` Branch.
 
 Für Bilder ohne bekannte URL wird ein neutraler Platzhalter mit CSS-Gradient verwendet. Service-Hero-Bilder (für Leistungsseiten) verwenden das Cover-Bild des ersten Projekts der jeweiligen Kategorie als Fallback.
 

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typografie — INFRA BAU GmbH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=DM+Sans:wght@400;500&family=Outfit:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="../state/helper.js" defer></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f1117; color: #e8eaf0; }
+
+  .page-header {
+    padding: 28px 40px 20px;
+    border-bottom: 1px solid #1e2230;
+    font-family: -apple-system, sans-serif;
+  }
+  .page-header h1 { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; }
+  .page-header h2 { font-size: 20px; font-weight: 700; margin-top: 5px; }
+  .page-header p { font-size: 13px; color: #6b7280; margin-top: 5px; }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 28px 40px 80px;
+  }
+
+  .option-card {
+    border: 2px solid #1e2230;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    background: #111827;
+  }
+  .option-card:hover { border-color: #3b5bdb; transform: translateY(-2px); }
+  .option-card.selected { border-color: #3b5bdb; box-shadow: 0 0 0 1px #3b5bdb; }
+
+  .type-preview {
+    background: #0d1117;
+    padding: 28px 24px 24px;
+    min-height: 260px;
+    position: relative;
+    border-bottom: 1px solid #1e2230;
+  }
+
+  /* ─── A: Barlow Condensed + Barlow ─── */
+  .font-a .tag {
+    font-family: 'Barlow', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #6ea8fe; margin-bottom: 10px;
+  }
+  .font-a h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px; font-weight: 800;
+    color: #ffffff; line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .font-a p {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px; color: #9ca3af;
+    line-height: 1.7; font-weight: 400;
+    max-width: 260px;
+  }
+  .font-a .cta {
+    font-family: 'Barlow', sans-serif;
+    display: inline-block; margin-top: 16px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: #fff; border-bottom: 1px solid #3b5bdb;
+    padding-bottom: 2px;
+  }
+
+  /* ─── B: IBM Plex Sans ─── */
+  .font-b .tag {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #6ea8fe; margin-bottom: 10px;
+  }
+  .font-b h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: #ffffff; line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .font-b p {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px; color: #9ca3af;
+    line-height: 1.7; font-weight: 400;
+    max-width: 260px;
+  }
+  .font-b .cta {
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: inline-block; margin-top: 16px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; border-bottom: 1px solid #3b5bdb;
+    padding-bottom: 2px;
+  }
+
+  /* ─── C: Syne + Plus Jakarta Sans ─── */
+  .font-c .tag {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: #6ea8fe; margin-bottom: 10px;
+  }
+  .font-c h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 38px; font-weight: 800;
+    color: #ffffff; line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+  .font-c p {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; color: #9ca3af;
+    line-height: 1.7; font-weight: 400;
+    max-width: 260px;
+  }
+  .font-c .cta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    display: inline-block; margin-top: 16px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #fff; border-bottom: 1px solid #3b5bdb;
+    padding-bottom: 2px;
+  }
+
+  /* Second row: small text samples */
+  .type-sample {
+    padding: 16px 24px;
+    border-bottom: 1px solid #1e2230;
+    display: flex; gap: 16px;
+  }
+  .sample-item { flex: 1; }
+  .sample-label { font-family: -apple-system, sans-serif; font-size: 9px; color: #4b5563; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+
+  .font-a .nav-sample { font-family: 'Barlow', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #d1d5db; }
+  .font-a .meta-sample { font-family: 'Barlow', sans-serif; font-size: 11px; color: #6b7280; }
+  .font-a .num-sample { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; color: #fff; text-transform: uppercase; line-height: 1; }
+
+  .font-b .nav-sample { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #d1d5db; }
+  .font-b .meta-sample { font-family: 'IBM Plex Sans', sans-serif; font-size: 11px; color: #6b7280; }
+  .font-b .num-sample { font-family: 'IBM Plex Sans', sans-serif; font-size: 28px; font-weight: 700; color: #fff; line-height: 1; }
+
+  .font-c .nav-sample { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #d1d5db; }
+  .font-c .meta-sample { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; color: #6b7280; }
+  .font-c .num-sample { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; line-height: 1; }
+
+  .card-label {
+    padding: 14px 16px 12px;
+    font-family: -apple-system, sans-serif;
+  }
+  .card-label .option-letter { font-size: 11px; font-weight: 800; color: #3b5bdb; }
+  .card-label .option-name { font-size: 13px; font-weight: 700; color: #e8eaf0; margin-top: 2px; }
+  .card-label .option-desc { font-size: 11px; color: #6b7280; margin-top: 4px; line-height: 1.5; }
+
+  .selection-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #1a1d2e; border-top: 1px solid #1e2230;
+    padding: 12px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: -apple-system, sans-serif;
+    font-size: 12px; color: #6b7280;
+  }
+  #selection-display { color: #3b5bdb; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Brainstorming — INFRA BAU GmbH</h1>
+  <h2>Typografie</h2>
+  <p>Drei authentische Alternativen zu Inter — keine KI-Aesthetik.</p>
+</div>
+
+<div class="options-grid">
+
+  <!-- A: Barlow Condensed -->
+  <div class="option-card font-a" data-choice="a" onclick="toggleSelect(this)">
+    <div class="type-preview">
+      <div class="tag">Tiefbau · Salzburg · Seit 2012</div>
+      <h1>Infra-<br>struktur<br>die trägt.</h1>
+      <p>Spezialist für Tief- und Infrastrukturbau. Leitungsbau, Betonbau, Freileitungsbau und Erdbau in ganz Österreich.</p>
+      <div class="cta">Referenzprojekte ansehen →</div>
+    </div>
+    <div class="type-sample font-a">
+      <div class="sample-item">
+        <div class="sample-label">Navigation</div>
+        <div class="nav-sample">Leitungsbau</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-label">Zahl</div>
+        <div class="num-sample">12+</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-label">Meta</div>
+        <div class="meta-sample">Sept 2013 – Dez 2014</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <div class="option-letter">A</div>
+      <div class="option-name">Barlow Condensed + Barlow</div>
+      <div class="option-desc">Industriell, kondensiert, kraftvoll. Wie Baustellenschilder und Ingenieurdokumente. Österreichische Baufirmen-Energie.</div>
+    </div>
+  </div>
+
+  <!-- B: IBM Plex Sans -->
+  <div class="option-card font-b" data-choice="b" onclick="toggleSelect(this)">
+    <div class="type-preview">
+      <div class="tag">Tiefbau · Salzburg · Seit 2012</div>
+      <h1>Infrastruktur<br>die trägt.</h1>
+      <p>Spezialist für Tief- und Infrastrukturbau. Leitungsbau, Betonbau, Freileitungsbau und Erdbau in ganz Österreich.</p>
+      <div class="cta">Referenzprojekte ansehen →</div>
+    </div>
+    <div class="type-sample font-b">
+      <div class="sample-item">
+        <div class="sample-label">Navigation</div>
+        <div class="nav-sample">Leitungsbau</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-label">Zahl</div>
+        <div class="num-sample">12+</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-label">Meta</div>
+        <div class="meta-sample">Sept 2013 – Dez 2014</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <div class="option-letter">B</div>
+      <div class="option-name">IBM Plex Sans</div>
+      <div class="option-desc">IBMs Engineering-Schrift. Technisch, präzise, seriös. Wirkt wie Ingenieurpläne — nicht wie eine App.</div>
+    </div>
+  </div>
+
+  <!-- C: Syne + Plus Jakarta Sans -->
+  <div class="option-card font-c" data-choice="c" onclick="toggleSelect(this)">
+    <div class="type-preview">
+      <div class="tag">Tiefbau · Salzburg · Seit 2012</div>
+      <h1>Infrastruktur<br>die trägt.</h1>
+      <p>Spezialist für Tief- und Infrastrukturbau. Leitungsbau, Betonbau, Freileitungsbau und Erdbau in ganz Österreich.</p>
+      <div class="cta">Referenzprojekte ansehen →</div>
+    </div>
+    <div class="type-sample font-c">
+      <div class="sample-item">
+        <div class="sample-label">Navigation</div>
+        <div class="nav-sample">Leitungsbau</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-label">Zahl</div>
+        <div class="num-sample">12+</div>
+      </div>
+      <div class="sample-item">
+        <div class="sample-label">Meta</div>
+        <div class="meta-sample">Sept 2013 – Dez 2014</div>
+      </div>
+    </div>
+    <div class="card-label">
+      <div class="option-letter">C</div>
+      <div class="option-name">Syne + Plus Jakarta Sans</div>
+      <div class="option-desc">Architektur-Studio-Ästhetik. Geometrisch, modern, hochwertig. Passt zu europäischen Engineering-Büros.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="selection-bar">
+  <span>Klicke eine Option zum Auswählen</span>
+  <span id="selection-display">Noch keine Auswahl</span>
+</div>
+
+<script>
+  function toggleSelect(el) {
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const choice = el.dataset.choice.toUpperCase();
+    const name = el.querySelector('.option-name').textContent;
+    document.getElementById('selection-display').textContent = 'Ausgewählt: ' + choice + ' — ' + name;
+    if (window.recordSelection) recordSelection(el.dataset.choice, name);
+  }
+</script>
+</body>
+</html>

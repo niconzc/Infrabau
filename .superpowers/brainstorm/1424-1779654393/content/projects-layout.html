@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projekte Layout — INFRA BAU GmbH</title>
+<script src="../state/helper.js" defer></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Helvetica Neue', sans-serif; background: #0f1117; color: #e8eaf0; }
+
+  .page-header {
+    padding: 28px 40px 20px;
+    border-bottom: 1px solid #1e2230;
+  }
+  .page-header h1 { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; }
+  .page-header h2 { font-size: 20px; font-weight: 700; margin-top: 5px; color: #e8eaf0; }
+  .page-header p { font-size: 13px; color: #6b7280; margin-top: 5px; }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 28px 40px 80px;
+  }
+
+  .option-card {
+    border: 2px solid #1e2230;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    background: #13161f;
+  }
+  .option-card:hover { border-color: #3b5bdb; transform: translateY(-2px); }
+  .option-card.selected { border-color: #3b5bdb; box-shadow: 0 0 0 1px #3b5bdb; }
+
+  .mockup-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    background: #0d1117;
+  }
+
+  /* ---- OPTION A: Asymmetric Masonry Grid ---- */
+  .proj-a {
+    width: 100%; height: 100%;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4px;
+    background: #111827;
+  }
+  .proj-a .sec-header {
+    grid-column: 1 / -1;
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .proj-a .sec-title { font-size: 9px; font-weight: 800; color: #fff; letter-spacing: -0.01em; }
+  .proj-a .sec-link { font-size: 6px; color: #3b5bdb; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .proj-tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .proj-tile .img-bg { position: absolute; inset: 0; }
+  .proj-tile .tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%); }
+  .proj-tile .tile-info { position: absolute; bottom: 6px; left: 8px; right: 8px; }
+  .proj-tile .tile-cat { font-size: 4.5px; color: #6ea8fe; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .proj-tile .tile-name { font-size: 6.5px; font-weight: 700; color: #fff; margin-top: 2px; line-height: 1.3; }
+
+  .tile-1 .img-bg { background: linear-gradient(135deg, #1a3a5c, #2d5a87); }
+  .tile-2 .img-bg { background: linear-gradient(135deg, #1a2d1a, #2d5a3c); }
+  .tile-3 .img-bg { background: linear-gradient(135deg, #3c1a1a, #5a2d2d); }
+  .tile-4 .img-bg { background: linear-gradient(135deg, #2d1a3c, #4a2d5a); }
+
+  .tile-1 { grid-column: 1; grid-row: 1; }
+  .tile-2 { grid-column: 2; grid-row: 1 / 3; }
+  .tile-3 { grid-column: 1; grid-row: 2; }
+
+  /* ---- OPTION B: Large Feature + Row ---- */
+  .proj-b {
+    width: 100%; height: 100%;
+    padding: 12px;
+    background: #111827;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .proj-b .sec-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .proj-b .sec-title { font-size: 9px; font-weight: 800; color: #fff; }
+  .proj-b .sec-link { font-size: 6px; color: #3b5bdb; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .proj-b .feature {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #0d2544, #1a3a5c, #2d5a87);
+  }
+  .proj-b .feature-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 70%); }
+  .proj-b .feature-info { position: absolute; left: 10px; bottom: 10px; }
+  .proj-b .feature-tag { font-size: 5px; color: #6ea8fe; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .proj-b .feature-name { font-size: 10px; font-weight: 800; color: #fff; line-height: 1.2; margin-top: 3px; }
+  .proj-b .feature-sub { font-size: 6px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+  .proj-b .feature-badge { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 4px 7px; font-size: 5.5px; color: #fff; }
+
+  .proj-b .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .proj-b .small-tile {
+    position: relative; overflow: hidden; border-radius: 2px;
+    aspect-ratio: 4/3;
+  }
+  .proj-b .small-tile .s-bg { position: absolute; inset: 0; }
+  .proj-b .small-tile .s-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); }
+  .proj-b .small-tile .s-info { position: absolute; bottom: 5px; left: 6px; right: 4px; }
+  .proj-b .small-tile .s-name { font-size: 5.5px; font-weight: 700; color: #fff; line-height: 1.3; }
+  .proj-b .small-tile .s-loc { font-size: 4.5px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+  .s1 .s-bg { background: linear-gradient(135deg, #1a2d1a, #2d5a3c); }
+  .s2 .s-bg { background: linear-gradient(135deg, #3c2d1a, #5a4a2d); }
+  .s3 .s-bg { background: linear-gradient(135deg, #1a1a3c, #2d2d5a); }
+
+  /* ---- OPTION C: Horizontal Scroll Cards ---- */
+  .proj-c {
+    width: 100%; height: 100%;
+    padding: 12px 12px 8px;
+    background: #111827;
+    display: flex; flex-direction: column;
+  }
+  .proj-c .sec-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+  .proj-c .sec-title { font-size: 9px; font-weight: 800; color: #fff; }
+  .proj-c .scroll-hint { font-size: 6px; color: #6b7280; }
+  .proj-c .cards-row { display: flex; gap: 6px; flex: 1; }
+  .proj-c .h-card {
+    flex: 0 0 38%;
+    position: relative; overflow: hidden; border-radius: 3px;
+    background: linear-gradient(135deg, #0d2544, #1a3a5c);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8px;
+  }
+  .proj-c .h-card:nth-child(2) { background: linear-gradient(135deg, #1a2d1a, #2d5a3c); }
+  .proj-c .h-card:nth-child(3) { background: linear-gradient(135deg, #2d1a3c, #4a2d5a); flex: 0 0 20%; }
+  .proj-c .h-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.05) 60%); }
+  .proj-c .h-card-content { position: relative; z-index: 1; }
+  .proj-c .h-cat { font-size: 4.5px; color: #6ea8fe; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+  .proj-c .h-name { font-size: 7.5px; font-weight: 800; color: #fff; line-height: 1.25; margin-top: 2px; }
+  .proj-c .h-loc { font-size: 5px; color: rgba(255,255,255,0.4); margin-top: 3px; }
+  .proj-c .h-card:nth-child(3) .h-name { font-size: 6px; }
+  .proj-c .dots { display: flex; gap: 4px; margin-top: 10px; justify-content: center; }
+  .proj-c .dot { width: 16px; height: 2px; background: #3b5bdb; border-radius: 1px; }
+  .proj-c .dot.inactive { background: #2d3748; }
+
+  .card-label {
+    padding: 14px 16px 12px;
+    border-top: 1px solid #1e2230;
+  }
+  .card-label .option-letter { font-size: 11px; font-weight: 800; color: #3b5bdb; }
+  .card-label .option-name { font-size: 13px; font-weight: 700; color: #e8eaf0; margin-top: 2px; }
+  .card-label .option-desc { font-size: 11px; color: #6b7280; margin-top: 4px; line-height: 1.5; }
+
+  .selection-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #1a1d2e; border-top: 1px solid #1e2230;
+    padding: 12px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: #6b7280;
+  }
+  #selection-display { color: #3b5bdb; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Brainstorming — INFRA BAU GmbH</h1>
+  <h2>Projekte-Sektion auf der Homepage</h2>
+  <p>Wie sollen die Referenzprojekte präsentiert werden?</p>
+</div>
+
+<div class="options-grid">
+
+  <!-- OPTION A: Asymmetric Masonry -->
+  <div class="option-card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="mockup-frame">
+      <div class="proj-a">
+        <div class="sec-header">
+          <div class="sec-title">Referenzprojekte</div>
+          <div class="sec-link">Alle Projekte →</div>
+        </div>
+        <div class="proj-tile tile-1">
+          <div class="img-bg"></div>
+          <div class="tile-overlay"></div>
+          <div class="tile-info">
+            <div class="tile-cat">Leitungsbau</div>
+            <div class="tile-name">A1 Telekom HWS Alpenstraße</div>
+          </div>
+        </div>
+        <div class="proj-tile tile-2">
+          <div class="img-bg"></div>
+          <div class="tile-overlay"></div>
+          <div class="tile-info">
+            <div class="tile-cat">Leitungsbau</div>
+            <div class="tile-name">ABA Bischofshofen BA 25</div>
+          </div>
+        </div>
+        <div class="proj-tile tile-3">
+          <div class="img-bg"></div>
+          <div class="tile-overlay"></div>
+          <div class="tile-info">
+            <div class="tile-cat">Erdbau</div>
+            <div class="tile-name">APG Gröbming</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <div class="option-letter">A</div>
+      <div class="option-name">Asymmetrisches Masonry Grid</div>
+      <div class="option-desc">Unregelmäßiges Grid — großes Bild + zwei kleinere. Dynamisch, modern. Zeigt 3–4 Projekte gleichzeitig.</div>
+    </div>
+  </div>
+
+  <!-- OPTION B: Feature + Row -->
+  <div class="option-card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="mockup-frame">
+      <div class="proj-b">
+        <div class="sec-header">
+          <div class="sec-title">Referenzprojekte</div>
+          <div class="sec-link">Alle Projekte →</div>
+        </div>
+        <div class="feature">
+          <div class="feature-overlay"></div>
+          <div class="feature-info">
+            <div class="feature-tag">Leitungsbau · Salzburg</div>
+            <div class="feature-name">ABA Bischofshofen<br>BA 25 und WVA BA 26</div>
+            <div class="feature-sub">€ 1.850.000 · Sept 2013 – Dez 2014</div>
+          </div>
+          <div class="feature-badge">Featured</div>
+        </div>
+        <div class="row">
+          <div class="small-tile s1">
+            <div class="s-bg"></div>
+            <div class="s-overlay"></div>
+            <div class="s-info">
+              <div class="s-name">APG Gröbming</div>
+              <div class="s-loc">Erdbau · Gröbming</div>
+            </div>
+          </div>
+          <div class="small-tile s2">
+            <div class="s-bg"></div>
+            <div class="s-overlay"></div>
+            <div class="s-info">
+              <div class="s-name">APG Fundamentsanierungen</div>
+              <div class="s-loc">Freileitungsbau · 2013</div>
+            </div>
+          </div>
+          <div class="small-tile s3">
+            <div class="s-bg"></div>
+            <div class="s-overlay"></div>
+            <div class="s-info">
+              <div class="s-name">BB Inkoba Lengau</div>
+              <div class="s-loc">Leitungsbau · Lengau</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <div class="option-letter">B</div>
+      <div class="option-name">Featured Projekt + Zeile</div>
+      <div class="option-desc">Ein großes Featured-Projekt dominiert, darunter 3 kleinere. Klare Hierarchie. Professionell, journalistisch.</div>
+    </div>
+  </div>
+
+  <!-- OPTION C: Horizontal Scroll -->
+  <div class="option-card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="mockup-frame">
+      <div class="proj-c">
+        <div class="sec-header">
+          <div class="sec-title">Referenzprojekte</div>
+          <div class="scroll-hint">← Scrollen →</div>
+        </div>
+        <div class="cards-row">
+          <div class="h-card">
+            <div class="h-card-overlay"></div>
+            <div class="h-card-content">
+              <div class="h-cat">Leitungsbau</div>
+              <div class="h-name">ABA Bischofshofen BA 25</div>
+              <div class="h-loc">Bischofshofen, Salzburg</div>
+            </div>
+          </div>
+          <div class="h-card">
+            <div class="h-card-overlay"></div>
+            <div class="h-card-content">
+              <div class="h-cat">Erdbau</div>
+              <div class="h-name">APG Gröbming</div>
+              <div class="h-loc">Gröbming, Steiermark</div>
+            </div>
+          </div>
+          <div class="h-card">
+            <div class="h-card-overlay"></div>
+            <div class="h-card-content">
+              <div class="h-cat">Freileitungsbau</div>
+              <div class="h-name">APG Kaprun</div>
+              <div class="h-loc">Kaprun</div>
+            </div>
+          </div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot inactive"></div>
+          <div class="dot inactive"></div>
+          <div class="dot inactive"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-label">
+      <div class="option-letter">C</div>
+      <div class="option-name">Horizontaler Projekt-Slider</div>
+      <div class="option-desc">Breite Karten nebeneinander, horizontal scrollbar. Modern, touch-freundlich. Mehr Luft pro Projekt.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="selection-bar">
+  <span>Klicke eine Option zum Auswählen</span>
+  <span id="selection-display">Noch keine Auswahl</span>
+</div>
+
+<script>
+  function toggleSelect(el) {
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    const choice = el.dataset.choice.toUpperCase();
+    const name = el.querySelector('.option-name').textContent;
+    document.getElementById('selection-display').textContent = 'Ausgewählt: ' + choice + ' — ' + name;
+    if (window.recordSelection) recordSelection(el.dataset.choice, name);
+  }
+</script>
+
+</body>
+</html>
